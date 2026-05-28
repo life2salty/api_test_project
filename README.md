@@ -1,6 +1,6 @@
 # API Test Automation Project
 
-**Author:** [Your name or nickname]  
+**Author:** Mansur/life2salty]  
 **Tech stack:** Python, Pytest, Requests, REST API  
 **Status:** ✅ All tests passing
 
