@@ -1,0 +1,46 @@
+name: Postman API Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+
+      - name: Install Newman and HTML reporter
+        run: npm install --global newman newman-reporter-htmlextra
+
+      - name: Run Postman collection and generate reports
+        run: >
+          newman run postman/JSONPlaceholder_API_Tests.postman_collection.json
+          --environment postman/JSONPlaceholder.postman_environment.json
+          --reporters cli,htmlextra,junit
+          --reporter-htmlextra-export postman-report.html
+          --reporter-junit-export postman-report.xml
+          --timeout-request 15000
+
+      - name: Upload Postman test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: postman-test-reports
+          path: |
+            postman-report.html
+            postman-report.xml
+          if-no-files-found: warn
+          retention-days: 14
