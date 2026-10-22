@@ -1,106 +1,110 @@
 # API Test Automation Project
 
-**Author:** Mansur/life2salty]  
-**Tech stack:** Python, Pytest, Requests, REST API  
-**Status:** ✅ All tests passing
+**Author:** Mansur Alimbekov  
+**GitHub:** [@life2salty](https://github.com/life2salty)  
+**Tech stack:** Python, pytest, Requests, REST API testing  
+**Project type:** Learning / portfolio project
 
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________
+## About the project
 
-## Project Description
+This repository contains a small set of automated API tests for [JSONPlaceholder](https://jsonplaceholder.typicode.com), a public demo REST API.
 
-A collection of automated tests for the public REST API [JSONPlaceholder](https://jsonplaceholder.typicode.com) (a fake API for testing).  
-This project demonstrates my skills in **API test automation** using Python: writing positive/negative tests, validating status codes, JSON structure, and response fields.
+The project is part of my QA Engineer learning journey and demonstrates basic API testing with Python, pytest, and Requests. It is a portfolio project; I am continuing to develop my testing skills and looking for my first QA opportunity.
 
-This is my first portfolio project. I am actively learning and improving my skills to become a Junior QA Automation Engineer.
+## Test coverage
 
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________
+The current suite contains six tests:
 
-## Test Coverage
+| Endpoint | Method | Scenario | Current checks |
+|---|---|---|---|
+| `/posts` | GET | Retrieve all posts | HTTP 200, response is a list, list is not empty |
+| `/posts/1` | GET | Retrieve one post | HTTP 200, returned post ID is 1 |
+| `/posts` | POST | Submit a new post | HTTP 201, title matches, response contains an ID |
+| `/posts/1` | PUT | Submit an update for a post | HTTP 200 |
+| `/posts/1` | DELETE | Submit a delete request | HTTP 200 or 204 |
+| `/posts/99999` | GET | Request a non-existent post | HTTP 404 |
 
-| Endpoint     | Method | Scenario                         | Validation                               |
-|--------------|--------|----------------------------------|------------------------------------------|
-| `/posts`     | GET    | Get all posts                    | Status 200, non-empty list               |
-| `/posts/{id}`| GET    | Get a single post                | Status 200, correct ID                   |
-| `/posts`     | POST   | Create a new post                | Status 201, title field, id exists       |
-| `/posts/{id}`| PUT    | Fully update a post              | Status 200                               |
-| `/posts/{id}`| DELETE | Delete a post                    | Status 200 or 204                        |
-| `/posts/99999`| GET   | Get non‑existent post            | Status 404 (negative test)               |
+These checks reflect what the tests currently assert. For example, the PUT test currently checks the status code only; it does not validate the updated response fields.
 
-Total tests: **6** (all passing ✅)
+## Tech stack
 
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________
+- **Python** — test implementation
+- **pytest** — test runner and fixtures
+- **Requests** — HTTP requests
+- **pytest-html** — optional HTML test report
 
-## How to Run Locally
+## Run the tests locally
 
-### Requirements
-- Python 3.7+
-- Git (optional, for cloning)
+### 1. Clone the repository
 
-### Steps
+```bash
+git clone https://github.com/life2salty/api_test_project.git
+cd api_test_project
+```
 
-1. **Clone the repository**
-   
-   git clone https://github.com/api_test_project/Mansur.git
-   
-2. Create and activate a virtual environment (recommended)
+### 2. Create and activate a virtual environment
 
-   python -m venv venv
-   source venv/bin/activate    # macOS/Linux
-   venv\Scripts\activate       # Windows 
+macOS / Linux:
 
-3. Install dependencies
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-   pip install -r requirements.txt
+Windows (PowerShell):
 
-4. Run test
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
 
-   pytest
+### 3. Install dependencies
 
-You will see green dots/checkmarks if all pass.
+```bash
+python -m pip install -r requirements.txt
+```
 
-To generate an HTML report: pytest --html=report.html
+### 4. Run the test suite
 
-5. Open report.html in your browser.
+```bash
+python -m pytest
+```
 
- 
-Sample Output
-text
-collected 6 items
-tests/test_posts.py ......  [100%]
-====================== 6 passed in 0.52s ======================
+### 5. (Optional) Generate an HTML report
 
-________________________________________________________________________________________________________________________________________________________________________________________________________________________
+```bash
+python -m pytest --html=report.html
+```
 
-Project Structure
-text
+Open `report.html` in a browser to review the report. The report is generated locally and is not committed automatically.
+
+> **Note:** The test suite has not been independently executed as part of this README update, so no test result is claimed here.
+
+## Project structure
+
+```text
 .
 ├── tests/
-│   └── test_posts.py          # main tests
-├── conftest.py                # fixture api_client (base URL, session)
-├── requirements.txt           # dependencies
-├── pytest.ini                 # pytest settings (optional)
-├── README.md                  # this file
-└── report.html                # generated after test run
+│   └── test_posts.py
+├── conftest.py
+├── requirements.txt
+└── README.md
+```
 
-________________________________________________________________________________________________________________________________________________________________________________________________________________________   
+## Important note about JSONPlaceholder
 
-Future Improvements
-  - Add tests for /comments and /users endpoints
-  
-  - Implement JSON Schema validation using jsonschema
-  
-  - Add logging
-  
-  - Set up CI/CD with GitHub Actions (auto-run tests on push)
-  
-  - Write UI tests with Playwright for a demo website
+JSONPlaceholder is a demo API. POST, PUT, and DELETE requests return simulated responses; they do not persist changes to a real database. These tests check the responses provided by the demo service, not durable data changes.
 
-________________________________________________________________________________________________________________________________________________________________________________________________________________________
+## Possible next improvements
 
-Contact
+- Add assertions for more response fields in the update test.
+- Add tests for other endpoints, such as `/comments` and `/users`.
+- Add response schema validation.
+- Add clearer test names and shared assertions where useful.
+- Run the suite automatically with GitHub Actions.
 
-I am looking for my first job or internship in QA (manual/auto). Ready to complete a test assignment.
+## About me
 
-Telegram: [@El_Zipp0]
+I am learning QA engineering and building portfolio projects to practice manual and automated testing. I am looking for my first QA Engineer opportunity or internship and am open to completing a test assignment.
 
-Email: [mansurcheg98@gmail.com]
+- **GitHub:** [github.com/life2salty](https://github.com/life2salty)
