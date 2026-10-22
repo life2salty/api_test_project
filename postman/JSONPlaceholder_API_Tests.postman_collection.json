@@ -33,8 +33,12 @@
               "pm.test(\"Response is a non-empty array\", function () {",
               "    pm.expect(pm.response.json()).to.be.an(\"array\").that.is.not.empty;",
               "});",
-              "    pm.response.to.have.jsonSchema({\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"userId\",\"id\",\"title\",\"body\"],\"properties\":{\"userId\":{\"type\":\"integer\"},\"id\":{\"type\":\"integer\"},\"title\":{\"type\":\"string\"},\"body\":{\"type\":\"string\"}}}});",
-              "    pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"userId\",\"id\",\"title\",\"body\"],\"properties\":{\"userId\":{\"type\":\"integer\"},\"id\":{\"type\":\"integer\"},\"title\":{\"type\":\"string\"},\"body\":{\"type\":\"string\"}}});",
+              "pm.test(\"First post has expected fields and types\", function () {",
+              "    const item = pm.response.json()[0];",
+              "    pm.expect(item.id).to.be.a(\"number\");",
+              "    pm.expect(item.userId).to.be.a(\"number\");",
+              "    pm.expect(item.title).to.be.a(\"string\");",
+              "    pm.expect(item.body).to.be.a(\"string\");",
               "});"
             ]
           }
@@ -296,8 +300,13 @@
               "pm.test(\"Response is a non-empty array\", function () {",
               "    pm.expect(pm.response.json()).to.be.an(\"array\").that.is.not.empty;",
               "});",
-              "    pm.response.to.have.jsonSchema({\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"postId\",\"id\",\"name\",\"email\",\"body\"],\"properties\":{\"postId\":{\"type\":\"integer\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"body\":{\"type\":\"string\"}}}});",
-              "    pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"postId\",\"id\",\"name\",\"email\",\"body\"],\"properties\":{\"postId\":{\"type\":\"integer\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"body\":{\"type\":\"string\"}}});",
+              "pm.test(\"First comment has expected fields and types\", function () {",
+              "    const item = pm.response.json()[0];",
+              "    pm.expect(item.postId).to.be.a(\"number\");",
+              "    pm.expect(item.id).to.be.a(\"number\");",
+              "    pm.expect(item.name).to.be.a(\"string\");",
+              "    pm.expect(item.email).to.be.a(\"string\");",
+              "    pm.expect(item.body).to.be.a(\"string\");",
               "});"
             ]
           }
@@ -386,8 +395,12 @@
               "pm.test(\"Response is a non-empty array\", function () {",
               "    pm.expect(pm.response.json()).to.be.an(\"array\").that.is.not.empty;",
               "});",
-              "    pm.response.to.have.jsonSchema({\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"id\",\"name\",\"username\",\"email\"],\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"}}}});",
-              "    pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"id\",\"name\",\"username\",\"email\"],\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"}}});",
+              "pm.test(\"First user has expected fields and types\", function () {",
+              "    const item = pm.response.json()[0];",
+              "    pm.expect(item.id).to.be.a(\"number\");",
+              "    pm.expect(item.name).to.be.a(\"string\");",
+              "    pm.expect(item.username).to.be.a(\"string\");",
+              "    pm.expect(item.email).to.be.a(\"string\");",
               "});"
             ]
           }
