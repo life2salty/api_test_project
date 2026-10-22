@@ -11,6 +11,11 @@ This repository contains automated API tests for [JSONPlaceholder](https://jsonp
 
 The project is part of my QA Engineer learning journey and demonstrates API testing with Python, pytest, Requests, JSON Schema validation, and GitHub Actions. It is a portfolio project; I am continuing to develop my testing skills and looking for my first QA opportunity.
 
+## Portfolio projects
+
+- **Python API automation:** [pytest + Requests tests](./tests/test_posts.py) with JSON Schema validation and GitHub Actions CI.
+- **Postman API testing:** [13-request collection](./postman/JSONPlaceholder_API_Tests.postman_collection.json) with environment variables, response assertions, JSON Schema checks, negative scenarios, Newman execution, and HTML/JUnit reports in CI. See the [Postman project README](./postman/README.md).
+
 ## Test coverage
 
 The suite currently contains 14 tests across two files:
