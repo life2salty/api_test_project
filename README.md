@@ -7,24 +7,24 @@
 
 ## About the project
 
-This repository contains a small set of automated API tests for [JSONPlaceholder](https://jsonplaceholder.typicode.com), a public demo REST API.
+This repository contains automated API tests for [JSONPlaceholder](https://jsonplaceholder.typicode.com), a public demo REST API.
 
 The project is part of my QA Engineer learning journey and demonstrates basic API testing with Python, pytest, and Requests. It is a portfolio project; I am continuing to develop my testing skills and looking for my first QA opportunity.
 
 ## Test coverage
 
-The current suite contains six tests:
+The current suite contains eight tests:
 
 | Endpoint | Method | Scenario | Current checks |
 |---|---|---|---|
-| `/posts` | GET | Retrieve all posts | HTTP 200, response is a list, list is not empty |
-| `/posts/1` | GET | Retrieve one post | HTTP 200, returned post ID is 1 |
-| `/posts` | POST | Submit a new post | HTTP 201, title matches, response contains an ID |
-| `/posts/1` | PUT | Submit an update for a post | HTTP 200 |
-| `/posts/1` | DELETE | Submit a delete request | HTTP 200 or 204 |
+| `/posts` | GET | Retrieve all posts | HTTP 200, response is a non-empty list |
+| `/posts/1` | GET | Retrieve one post | HTTP 200, correct ID, title/body types, positive user ID |
+| `/posts` | POST | Submit a new post | HTTP 201, title/body/userId match request, response contains ID |
+| `/posts/1` | PUT | Submit an update for a post | HTTP 200, returned ID/title/body/userId match request |
+| `/posts/1` | DELETE | Submit a delete request | HTTP 200 or 204; JSON object when response is HTTP 200 |
 | `/posts/99999` | GET | Request a non-existent post | HTTP 404 |
-
-These checks reflect what the tests currently assert. For example, the PUT test currently checks the status code only; it does not validate the updated response fields.
+| `/comments` | GET | Retrieve all comments | HTTP 200, non-empty list, expected fields in first item |
+| `/users` | GET | Retrieve all users | HTTP 200, non-empty list, expected fields in first item |
 
 ## Tech stack
 
@@ -32,6 +32,7 @@ These checks reflect what the tests currently assert. For example, the PUT test 
 - **pytest** — test runner and fixtures
 - **Requests** — HTTP requests
 - **pytest-html** — optional HTML test report
+- **GitHub Actions** — run tests automatically on pushes and pull requests to `master`
 
 ## Run the tests locally
 
@@ -67,7 +68,7 @@ python -m pip install -r requirements.txt
 ### 4. Run the test suite
 
 ```bash
-python -m pytest
+python -m pytest -v
 ```
 
 ### 5. (Optional) Generate an HTML report
@@ -78,18 +79,11 @@ python -m pytest --html=report.html
 
 Open `report.html` in a browser to review the report. The report is generated locally and is not committed automatically.
 
-> **Note:** The test suite has not been independently executed as part of this README update, so no test result is claimed here.
+## Continuous integration
 
-## Project structure
+The GitHub Actions workflow is located at `.github/workflows/pytest.yml`. It installs the dependencies and runs the test suite when code is pushed to `master`, when a pull request targets `master`, or when manually triggered from the Actions tab.
 
-```text
-.
-├── tests/
-│   └── test_posts.py
-├── conftest.py
-├── requirements.txt
-└── README.md
-```
+See [GitHub Actions](https://github.com/life2salty/api_test_project/actions) for run results. The workflow has been added to the repository; its successful execution should be verified in the Actions tab.
 
 ## Important note about JSONPlaceholder
 
@@ -97,11 +91,10 @@ JSONPlaceholder is a demo API. POST, PUT, and DELETE requests return simulated r
 
 ## Possible next improvements
 
-- Add assertions for more response fields in the update test.
-- Add tests for other endpoints, such as `/comments` and `/users`.
 - Add response schema validation.
-- Add clearer test names and shared assertions where useful.
-- Run the suite automatically with GitHub Actions.
+- Add tests for more negative scenarios and boundary values.
+- Improve reusable assertions and test data management.
+- Save an HTML report as a GitHub Actions artifact.
 
 ## About me
 
