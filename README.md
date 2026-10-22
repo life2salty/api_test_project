@@ -16,6 +16,11 @@ The project is part of my QA Engineer learning journey and demonstrates API test
 - **Python API automation:** [pytest + Requests tests](./tests/test_posts.py) with JSON Schema validation and GitHub Actions CI.
 - **Postman API testing:** [13-request collection](./postman/JSONPlaceholder_API_Tests.postman_collection.json) with environment variables, response assertions, JSON Schema checks, negative scenarios, Newman execution, and HTML/JUnit reports in CI. See the [Postman project README](./postman/README.md).
 
+## QA documentation
+
+- [API Test Plan](./docs/test-plan.md) — scope, approach, entry/exit criteria, risks, and limitations.
+- [API Test Cases](./docs/test-cases.md) — 14 existing automated scenarios and clearly separated ideas for future coverage.
+
 ## Test coverage
 
 The suite currently contains 14 tests across two files:
